@@ -1,0 +1,180 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1343\cocoasubrtf160
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\vieww12000\viewh13360\viewkind0
+\deftab720
+\pard\pardeftab720\sl276\slmult1\sa200\qc
+
+\f0\b\fs36 \cf0 \ul \ulc0 Image,Video and Contact Picker
+\b0\fs28 \ulnone \
+\ul \
+\pard\pardeftab720\sl276\slmult1\sa200
+
+\b \cf0 \ulnone ImageVideoContactPicker
+\b0  available for android and iOS, this plugin is very useful for developer who are developing application or game, by using this plugin you can browse image,video from gallery and pick any contact from phonebook, you don't need to write native code for that.\
+\
+Below is the integration guide and functions details for you.\
+\
+Integration : Follow the given step to integrate plugin in your project:\
+1). Import \'93ImageVideoContactPicker" unitypackage into your project\
+2). Make sure there are following files are imported\
+	- Assets/Plugins/Android/AndroidPicker.jar\
+	- Assets/Plugins/Android/AndroidPicker.cs\
+	- Assets/Plugins/ImageVideoContactPicker.dll\
+	- Assets/Plugins/iOS/libImageVideoContactPicker.a\
+\pard\pardeftab720\fi720\sl276\slmult1\sa200
+\cf0 - Assets/ImageVideoContactPicker/Prefab/PickerEventListener.prefab\
+\pard\pardeftab720\sl276\slmult1\sa200
+\cf0 \
+These are required file for this plugin, you will also get ImageVideoContactPicker/Example/ folder for demo scene.\
+3). Configure 
+\b AndroidManifest.xml 
+\b0  for Android\
+Add this line in your AndroidManifest.xml for read contact permission
+\b \
+<uses-permission android:name="android.permission.READ_CONTACTS"/>
+\b0 \
+Add this line for a activity
+\b \
+<activity android:name="com.astricstore.imagevideocontactpicker.AndroidPickerActivity" />
+\b0 \
+Note : You can use provided AndroidManifest.xml file in your project, you have to change bundle identifier as per your projects identifier.\
+- Also you can generate AndroidManifest.xml by following these steps:\
+** Simply build your project for android after setting alll parameters in player setting.\
+** You will get your AndroidManifest.xml file in  
+\b YourProject\\Temp\\StagingArea\\AndroidManifest.xml\
+
+\b0 Add require two lines in this xml in proper place.\
+\
+3.1) Add framework in xCode for iOS\
+Build your project and make xCode project, follow these steps\
+- Select your project in xCode hierarchy \
+- Goto Build Phase\
+- Click add(+) button in \'93Link Binary With Libraries\'94\
+- Search AddressBook.framework and add\
+- Search MobileCoreServices.framework and add\
+\
+4). Drag 
+\b PickerEventListener.prefab
+\b0  into your Hierarchy.\
+5). Import ImageVideoContactPicker package into your script by writing following line on the top of your script\
+	
+\b using
+\b0  
+\b ImageVideoContactPicker
+\b0 ;\
+6). Plugin is now ready to use, you can simply call function provided in plugin.\
+ 
+\b \
+# Use this function when you want to browse image from gallery.
+\b0 \
+
+\b Android
+\b0  : AndroidPicker.BrowseImage();\
+
+\b iOS
+\b0  : IOSPicker.BrowseImage();\
+
+\b \
+ # Use this function when you want to browse video from gallery.
+\b0 \
+\pard\pardeftab720
+
+\b \cf0 Android
+\b0  : AndroidPicker.BrowseVideo();\
+
+\b IOS
+\b0  : IOSPicker.BrowseVideo();\
+\
+Note: iOS compress video so it will take some to compress.\
+\pard\pardeftab720\sl276\slmult1\sa200
+
+\b \cf0 \
+# Use this function when you want to browse contact from phonebook.
+\b0 \
+
+\b Android
+\b0  : AndroidPicker.BrowseContact();\
+
+\b IOS
+\b0  : IOSPicker.BrowseContact();\
+\
+7). Event will be fired after successful/un-successful operation.\
+\pard\pardeftab720\sl276\slmult1\sa200
+
+\b\fs36 \cf0 \
+\pard\pardeftab720\sl276\slmult1\sa200
+\cf0 \ul Add Events like:
+\b0\fs28 \ulnone \
+\ul \
+\pard\pardeftab720
+
+\b \cf0 \ulnone # PickerEventListener.onImageSelect += OnImageSelect;
+\b0 \
+\pard\pardeftab720\sl276\slmult1\sa200
+\cf0 void OnImageSelect(string imgPath)\
+\{\
+// imgPath : image path\
+\}\
+\
+
+\b # PickerEventListener.onImageLoad += OnImageLoad;\
+
+\b0 void OnImageLoad(string imgPath, Texture2D tex)\
+\{\
+// imgPath : borwsed image path\
+// tex : image texture\
+\}\
+\
+
+\b # PickerEventListener.onVideoSelect += OnVideoSelect
+\b0 \
+void OnVideoSelect(string vidPath)\
+\{\
+// vidPath : video path\
+\}\
+
+\b \
+# PickerEventListener.onContactSelect += OnContactSelect;
+\b0 \
+void OnContactSelect(string name, List<string> numbers, List<string> emails)\
+\{\
+// name : name of contact selected\
+// numbers : list of numbers available in selected contact\
+// emails : list of emails available in selected contact\
+\}\
+
+\b # PickerEventListener.onError += OnError;
+\b0 \
+void OnError(string errorMsg)\
+\{\
+// errorMsg : error message\
+\}\
+\
+
+\b # PickerEventListener.onCancel += OnCancel;
+\b0 \
+void OnError(string errorMsg)\
+\{\
+// errorMsg : error message\
+\}\
+
+\b \
+\pard\pardeftab720\sl276\slmult1\sa200
+\cf0 \ul Remove Events like:
+\b0 \ulnone \
+\pard\pardeftab720
+\cf0 PickerEventListener.onImageSelect -= OnImageSelect;\
+PickerEventListener.onImageLoad -= OnImageLoad;\
+PickerEventListener.onVideoSelect -= OnVideoSelect;\
+PickerEventListener.onContactSelect -= OnContactSelect;\
+PickerEventListener.onError -= OnError;\
+PickerEventListener.onCancel -= OnCancel;\
+\pard\pardeftab720\sl276\slmult1\sa200
+\cf0 \
+For support email me at 
+\b devesh.pandey19@gmail.com
+\b0 \
+\
+\
+}
